@@ -41,7 +41,13 @@ class App(
  */
 object Apps {
 
-    fun load(context: Context, ancho: Int, alto: Int, ocultas: Set<String>): List<App> {
+    fun load(
+        context: Context,
+        ancho: Int,
+        alto: Int,
+        ocultas: Set<String>,
+        fijadas: List<String> = emptyList(),
+    ): List<App> {
         val pm = context.packageManager
         val propio = context.packageName
 
@@ -51,8 +57,9 @@ object Apps {
             .distinctBy { it.activityInfo.packageName }
             .filter { it.activityInfo.packageName !in ocultas }
             .mapNotNull { info -> runCatching { convertir(pm, info, ancho, alto) }.getOrNull() }
-            // Primero las elegidas a mano, despues el resto alfabetico.
-            .sortedWith(compareBy({ orden(it.packageName) }, { it.label.lowercase() }))
+            // Primero las que fijo el usuario, despues las de la lista de abajo
+            // y al final el resto alfabetico.
+            .sortedWith(compareBy({ orden(it.packageName, fijadas) }, { it.label.lowercase() }))
             .toList()
     }
 
@@ -91,8 +98,12 @@ object Apps {
         "com.android.chrome",
     )
 
-    private fun orden(packageName: String?): Int =
-        PRIORIDAD.indexOf(packageName).takeIf { it >= 0 } ?: PRIORIDAD.size
+    private fun orden(packageName: String?, fijadas: List<String>): Int {
+        val fijada = fijadas.indexOf(packageName)
+        if (fijada >= 0) return fijada
+        val prioridad = PRIORIDAD.indexOf(packageName)
+        return fijadas.size + (if (prioridad >= 0) prioridad else PRIORIDAD.size)
+    }
 
     private fun esCuadrado(d: Drawable): Boolean {
         val w = d.intrinsicWidth

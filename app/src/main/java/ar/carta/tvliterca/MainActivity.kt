@@ -217,10 +217,11 @@ class MainActivity : Activity() {
         val ancho = dp(ANCHO_DP)
         val alto = dp(ALTO_DP)
         val ocultas = ocultas()
+        val fijadas = fijadas()
         // Fuera del hilo principal: consultar el sistema y rasterizar decenas
         // de dibujos no es gratis, y trabar el arranque es lo que vinimos a evitar.
         Thread {
-            val lista = runCatching { Apps.load(this, ancho, alto, ocultas) }
+            val lista = runCatching { Apps.load(this, ancho, alto, ocultas, fijadas) }
                 .onFailure { Log.w(TAG, "no se pudo leer la lista de apps", it) }
                 .getOrDefault(emptyList())
             val propias = propias(ancho, alto, ocultas.isNotEmpty())
@@ -311,10 +312,15 @@ class MainActivity : Activity() {
         val paquete = app.packageName ?: return
         AlertDialog.Builder(this)
             .setTitle(app.label)
-            .setItems(arrayOf("Ocultar de esta pantalla", "Información (borrar caché)")) { _, cual ->
+            .setItems(arrayOf(
+                if (paquete in fijadas()) "Quitar de las fijadas" else "Fijar al principio",
+                "Ocultar de esta pantalla",
+                "Información (borrar caché)",
+            )) { _, cual ->
                 when (cual) {
-                    0 -> ocultar(paquete)
-                    1 -> runCatching {
+                    0 -> fijar(paquete)
+                    1 -> ocultar(paquete)
+                    2 -> runCatching {
                         startActivity(
                             Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$paquete"))
                                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -323,6 +329,21 @@ class MainActivity : Activity() {
                 }
             }
             .show()
+    }
+
+    /**
+     * Las apps que el usuario puso al principio, en el orden en que las fijo.
+     * Se guardan como texto separado por comas porque un StringSet no
+     * conserva el orden.
+     */
+    private fun fijadas(): List<String> =
+        (prefs.getString(FIJADAS, "") ?: "").split(',').filter { it.isNotBlank() }
+
+    private fun fijar(paquete: String) {
+        val actuales = fijadas()
+        val nuevas = if (paquete in actuales) actuales - paquete else actuales + paquete
+        prefs.edit().putString(FIJADAS, nuevas.joinToString(",")).apply()
+        cargar()
     }
 
     private fun ocultas(): Set<String> =
@@ -412,6 +433,7 @@ class MainActivity : Activity() {
         const val MB = 1024L * 1024L
 
         const val OCULTAS = "ocultas"
+        const val FIJADAS = "fijadas"
         const val TAG = "TVLiteRCA"
 
         // java.time no existe antes de Android 8: SimpleDateFormat si.

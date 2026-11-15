@@ -45,6 +45,9 @@ Se mantienen las decisiones que hacen a TV Lite liviano:
   y muestra cuántos MB se recuperaron. Solo toca procesos que el sistema ya
   considera prescindibles.
 - **Mantener apretado OK** (o la tecla **Menú** del control) sobre una app:
+  - *Fijar al principio*, para dejar primeras las que más se usan (la de
+    películas, YouTube...). Se pueden fijar varias; quedan en el orden en que
+    se fijaron.
   - *Ocultar de esta pantalla*, para sacar las apps de fábrica que nadie usa.
   - *Información*: la pantalla del sistema para **borrar caché**, a dos
     clics. Ver *Reglas para no romper nada*.
