@@ -311,7 +311,7 @@ class MainActivity : Activity() {
         val paquete = app.packageName ?: return
         AlertDialog.Builder(this)
             .setTitle(app.label)
-            .setItems(arrayOf("Ocultar de esta pantalla", "Información (borrar caché, desinstalar)")) { _, cual ->
+            .setItems(arrayOf("Ocultar de esta pantalla", "Información (borrar caché)")) { _, cual ->
                 when (cual) {
                     0 -> ocultar(paquete)
                     1 -> runCatching {

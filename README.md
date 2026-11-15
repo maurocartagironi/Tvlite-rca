@@ -46,10 +46,39 @@ Se mantienen las decisiones que hacen a TV Lite liviano:
   considera prescindibles.
 - **Mantener apretado OK** (o la tecla **Menú** del control) sobre una app:
   - *Ocultar de esta pantalla*, para sacar las apps de fábrica que nadie usa.
-  - *Información*: la pantalla del sistema para **borrar caché, forzar
-    detención o desinstalar**, a dos clics.
+  - *Información*: la pantalla del sistema para **borrar caché**, a dos
+    clics. Ver *Reglas para no romper nada*.
 - **Tarjeta "Mostrar ocultas"** cuando hay alguna oculta.
 - **Tarjeta "Ajustes"**, siempre. Es parte del plan para volver atrás.
+
+## Reglas para no romper nada
+
+El TV box no es nuestro y tiene apps y configuraciones que hay que conservar.
+
+- **Esta app no borra, desinstala ni modifica ninguna otra app.** Solo las
+  lista y las abre. "Ocultar" es solo de esta pantalla: la app sigue instalada
+  y vuelve con "Mostrar ocultas".
+- **"Liberar memoria" no borra nada**: cierra lo que quedó abierto en segundo
+  plano, igual que si se reiniciara el TV box.
+- **En la información de una app: "Borrar caché" sí, "Borrar datos" NUNCA.**
+  Borrar datos deja la app como recién instalada: se pierden listas, cuentas y
+  configuraciones.
+- **Probar antes de hacerla pantalla de inicio**: abrirla desde la lista de
+  apps unos días. Recién si anda bien, elegirla con "Siempre".
+
+## Que el televisor arranque directo en el TV box
+
+En el televisor (menú del RCA), buscar alguna de estas opciones; el nombre
+cambia según la versión:
+
+- **T-Link / HDMI-CEC**: activarlo en el televisor. Si el TV box también lo
+  tiene (Ajustes → Pantalla o Sistema → HDMI-CEC), prender uno prende el otro
+  y el televisor cambia solo a esa entrada.
+- **Fuente al encender / Última entrada**: si existe, elegir la entrada HDMI
+  del TV box o "última usada".
+
+Si ninguna aparece, la alternativa es dejar el televisor en la entrada HDMI al
+apagarlo: la mayoría de estos equipos arrancan en la última fuente usada.
 
 ## Instalar en el TV box (sin computadora)
 
