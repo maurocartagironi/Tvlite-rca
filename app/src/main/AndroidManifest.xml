@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+      Sin INTERNET: esta version no tiene clima ni nada que salga a la red.
+      Lo unico que pide es poder cerrar apps que quedaron en segundo plano,
+      para el boton "Liberar memoria". Es un permiso comun, no pide nada al
+      usuario.
+    -->
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+
+    <!--
+      La diferencia clave con TV Lite: el RCA no es Android TV, es un Android
+      comun con un launcher propio. Con leanback obligatorio el televisor
+      rechazaria la instalacion.
+    -->
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <!-- Desde Android 11 hace falta declarar que apps queremos ver. En el RCA
+         no aplica, pero no cuesta nada y deja la app sana en equipos nuevos. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="TV Lite"
+        android:icon="@drawable/icono"
+        android:banner="@drawable/icono"
+        android:theme="@style/Tema"
+        android:allowBackup="false"
+        android:supportsRtl="false">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:stateNotNeeded="true"
+            android:screenOrientation="landscape"
+            android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout|smallestScreenSize|uiMode|density|fontScale|locale|layoutDirection">
+
+            <!--
+              HOME para atender el boton de inicio; LAUNCHER y LEANBACK para
+              seguir apareciendo en la lista de apps, que es por donde se la
+              abre si deja de ser la pantalla de inicio.
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

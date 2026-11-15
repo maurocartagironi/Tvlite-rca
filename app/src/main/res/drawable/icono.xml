@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Una pantalla con una fila de tarjetas. Vector: AGP genera los PNG para
+     las versiones de Android que no saben dibujar vectores. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#FF1C2329" android:pathData="M4,8h40v28h-40z" />
+    <path android:fillColor="#FFFFFFFF" android:pathData="M8,24h9v7h-9zM19.5,24h9v7h-9zM31,24h9v7h-9z" />
+    <path android:fillColor="#B3FFFFFF" android:pathData="M8,12h14v4h-14z" />
+    <path android:fillColor="#FF1C2329" android:pathData="M16,38h16v3h-16z" />
+</vector>

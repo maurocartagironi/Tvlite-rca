@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      DeviceDefault y no AppCompat: no hay librerias. El fondo va en el tema
+      para que la ventana nazca del color correcto, sin destello blanco.
+      Sin animaciones de ventana: en este televisor cada cuadro cuesta.
+    -->
+    <style name="Tema" parent="@android:style/Theme.DeviceDefault.NoActionBar">
+        <item name="android:windowBackground">@color/fondo</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+</resources>

@@ -1,0 +1,51 @@
+# Compila el APK en GitHub, porque se arma sin una computadora con Android
+# Studio. En cada push a la rama principal publica (o reemplaza) la version
+# "ultima" en Releases, de donde se descarga el APK sin iniciar sesion.
+name: APK
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compilar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: android-actions/setup-android@v3
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Compilar release
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon assembleRelease
+          cp app/build/outputs/apk/release/app-release.apk tvlite-rca.apk
+          ls -l tvlite-rca.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tvlite-rca
+          path: tvlite-rca.apk
+
+      - name: Publicar en Releases
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ultima
+          name: Ultima version
+          prerelease: false
+          make_latest: true
+          files: tvlite-rca.apk
+          body: |
+            APK compilado automaticamente desde ${{ github.sha }}.
+            Ver el README para instalarlo en el televisor.

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Un color plano. Sin imagen de fondo: es el ahorro mas barato. -->
+    <color name="fondo">#0B0E11</color>
+</resources>

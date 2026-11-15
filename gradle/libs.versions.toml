@@ -1,0 +1,10 @@
+[versions]
+# Las mismas que el otro proyecto, que ya sabemos que compilan en esta maquina.
+agp = "9.4.1"
+
+[libraries]
+# Vacio, y no por falta de ganas: la app no depende de nada fuera del
+# framework de Android. Ver el README.
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
