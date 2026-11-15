@@ -33,7 +33,7 @@ Se mantienen las decisiones que hacen a TV Lite liviano:
 
 ## Lo que agrega
 
-- **Memoria libre** arriba a la derecha, actualizada cada minuto. El problema
+- **Versión de Android y memoria libre** arriba a la derecha, actualizadas cada minuto. En el RCA la versión no aparece en ningún menú. El problema
   de estos televisores es la memoria, no el procesador, y así se ve.
 - **Tarjeta "Liberar memoria"**: cierra lo que quedó abierto en segundo plano
   y muestra cuántos MB se recuperaron. Solo toca procesos que el sistema ya

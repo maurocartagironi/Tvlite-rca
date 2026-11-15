@@ -357,7 +357,10 @@ class MainActivity : Activity() {
     private fun ponerMemoria() {
         val info = ActivityManager.MemoryInfo()
         am.getMemoryInfo(info)
-        memoria.text = "Memoria libre: ${info.availMem / MB} de ${info.totalMem / MB} MB"
+        // La version de Android va aca porque en el RCA no aparece en ningun
+        // menu, y es el dato que define que se puede hacer con el televisor.
+        memoria.text = "Android ${Build.VERSION.RELEASE}  ·  " +
+            "Memoria libre: ${info.availMem / MB} de ${info.totalMem / MB} MB"
     }
 
     /**
