@@ -1,7 +1,12 @@
 # TV Lite RCA
 
-Una pantalla de inicio liviana para el **Smart TV RCA 40D2900**
-(chasis MediaTek **MT5655**, firmware `V8-T56FT05-LF1V299`).
+Una pantalla de inicio liviana para el **TV box Android** conectado a un
+televisor RCA 40D2900.
+
+El televisor (chasis MediaTek MT5655, firmware `V8-T56FT05-LF1V299`) es solo
+la pantalla: su firmware no se toca. Lo lento es el TV box, un Android chino
+genérico con launcher propio (Chrome, KD Player, "Store"), y es ahí donde se
+instala esto.
 
 Sale de [TV Lite](https://github.com/maurocartagironi/tvlite), el launcher que
 se hizo para un BGH con 935 MB de RAM. La idea es la misma: no es un launcher
@@ -11,9 +16,10 @@ bonito, es un launcher que entra. Lo que cambia es el televisor.
 
 | | TV Lite (BGH) | Este (RCA) |
 | --- | --- | --- |
-| Android | 14, Google TV | viejo y desconocido, launcher propio de fábrica |
+| Equipo | televisor BGH con Google TV | TV box Android genérico |
+| Android | 14, Google TV | versión a confirmar, launcher propio de fábrica |
 | `minSdk` | 31 (Android 12) | **19 (Android 4.4)** |
-| Android TV (`leanback`) | obligatorio | **opcional**: si no, el RCA rechaza la instalación |
+| Android TV (`leanback`) | obligatorio | **opcional**: si no, el TV box rechaza la instalación |
 | Apps que lista | solo las de Android TV, con banner | **todas**: las de TV con banner y las comunes con ícono y nombre |
 | Disposición | una fila | **grilla**: estos televisores traen muchas apps de fábrica |
 | Fondo | fotos que se cargan por `adb` | color plano: acá no hay `adb` |
@@ -33,7 +39,7 @@ Se mantienen las decisiones que hacen a TV Lite liviano:
 
 ## Lo que agrega
 
-- **Versión de Android y memoria libre** arriba a la derecha, actualizadas cada minuto. En el RCA la versión no aparece en ningún menú. El problema
+- **Versión de Android y memoria libre** arriba a la derecha, actualizadas cada minuto. Así se sabe qué Android tiene el TV box sin buscar en los menús. El problema
   de estos televisores es la memoria, no el procesador, y así se ve.
 - **Tarjeta "Liberar memoria"**: cierra lo que quedó abierto en segundo plano
   y muestra cuántos MB se recuperaron. Solo toca procesos que el sistema ya
@@ -45,22 +51,21 @@ Se mantienen las decisiones que hacen a TV Lite liviano:
 - **Tarjeta "Mostrar ocultas"** cuando hay alguna oculta.
 - **Tarjeta "Ajustes"**, siempre. Es parte del plan para volver atrás.
 
-## Instalar en el televisor (sin computadora)
+## Instalar en el TV box (sin computadora)
 
 1. **Bajar el APK.** En [Releases](../../releases/tag/ultima) está
    `tvlite-rca.apk`, que GitHub compila solo en cada cambio. Descargalo en la
    compu o el celular y copialo a un **pendrive**.
-2. **Permitir la instalación.** En el televisor: Ajustes → Seguridad (o
+2. **Permitir la instalación.** En los Ajustes del TV box (no los del televisor): Ajustes → Seguridad (o
    Restricciones) → activar **Orígenes desconocidos**.
-3. **Instalar.** Enchufá el pendrive, abrí el explorador de archivos o el
-   reproductor multimedia del televisor, buscá `tvlite-rca.apk` y abrilo.
+3. **Instalar.** Enchufá el pendrive al TV box, abrí su explorador de archivos, buscá `tvlite-rca.apk` y abrilo.
 4. **Probarlo.** Abrilo desde la lista de apps (se llama *TV Lite*) y verificá
    que ande bien con el control.
 5. **Hacerlo la pantalla de inicio.** Apretá **Inicio** en el control. Al haber
    dos launchers, el televisor debería preguntar cuál usar: elegí *TV Lite* y
    **Siempre**.
 
-Si el televisor no pregunta, puede ser que el fabricante haya bloqueado el
+Si el TV box no pregunta, puede ser que el fabricante haya bloqueado el
 cambio de launcher. En ese caso TV Lite igual se puede usar abriéndolo desde
 la lista de apps, pero el launcher de fábrica sigue cargado por detrás y la
 mejora es menor.
@@ -76,9 +81,12 @@ eso el arranque está envuelto en `runCatching`: si algo sale mal aparece una
 pantalla mínima con un botón a Ajustes. Una pantalla de inicio que se cae deja
 al televisor sin ninguna.
 
-## Otras cosas que ayudan en este televisor
+## Otras cosas que ayudan
 
-- **Desenchufarlo un minuto** de vez en cuando. Apagarlo con el control lo
+- **En el televisor, poner la entrada HDMI del TV box en modo de imagen
+  "Juego"** (o desactivar reducción de ruido y suavizado de movimiento). Le
+  saca retardo a la imagen y el control se siente más rápido.
+- **Desenchufar el TV box un minuto** de vez en cuando. Apagarlo con el control lo
   deja en espera y no libera nada. Si existe "Encendido rápido", desactivarlo.
 - **Dejar al menos 20 % de almacenamiento libre.**
 - **Opciones de desarrollador** (Ajustes → Acerca de → 7 toques en *Número de
@@ -101,6 +109,6 @@ y nunca va a Play.
 
 ## Pendiente
 
-- Saber qué versión de Android tiene el televisor; si es 5.0 o más, se puede
+- Saber qué versión de Android tiene el TV box; si es 5.0 o más, se puede
   subir `minSdk` y simplificar.
 - Medir el consumo real contra el launcher de fábrica (necesita `adb`).

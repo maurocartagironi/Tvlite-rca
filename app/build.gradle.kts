@@ -11,8 +11,8 @@ android {
         // Otro id que TV Lite, para que nunca se pisen si alguna vez
         // terminan en el mismo equipo.
         applicationId = "ar.carta.tvliterca"
-        // La gran diferencia con TV Lite. El RCA 40D2900 (MediaTek MT5655)
-        // trae un Android viejo de fabrica, y no sabemos cual. 19 es
+        // La gran diferencia con TV Lite. El TV box conectado al RCA
+        // es un Android chino generico, y no sabemos cual. 19 es
         // Android 4.4: cubre todo lo que razonablemente puede tener. Lo que
         // es de versiones nuevas se usa solo detras de un chequeo de version.
         minSdk = 19
