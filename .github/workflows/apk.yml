@@ -21,7 +21,10 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - uses: android-actions/setup-android@v3
+      # El runner ya trae el SDK de Android; solo hay que aceptar las
+      # licencias para que Gradle baje la plataforma que falte.
+      - name: Licencias del SDK
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
       - uses: gradle/actions/setup-gradle@v4
 
